@@ -1,3 +1,12 @@
-.container-fluid {
-  display: flex;
-}
+body,
+#col_navbar_holder,
+#main_container {display: flex; flex-direction: column;}
+
+#main_container {margin-left: 0; margin-right: 0;}
+
+#map_outer {width: 100%;}
+
+#missions_outer,
+#buildings_outer,
+#chat_outer,
+#radio_outer {position: absolute; width: 100% !important; height: 75%; z-index: 1000; display: none;}
