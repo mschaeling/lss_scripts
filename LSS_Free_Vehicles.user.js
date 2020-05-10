@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  try to take over the world!
-// @author       You
+// @author       mschaeling
 // @match        https://www.leitstellenspiel.de/
 // @grant        GM_addStyle
 // ==/UserScript==
