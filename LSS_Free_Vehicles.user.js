@@ -9,11 +9,11 @@
 // ==/UserScript==
 
 GM_addStyle(`
-#vhc_bar {padding: 0 0 1em 0;}
-#vhc_free, #vhc_occupied {display: inline-block;}
-.vhc_display {display: inline-block; padding: .25em; margin-left: .25em; margin-right: 1em; background: rgba(0,0,0,.1);}
-.vhc_amount {padding-left: .5em; padding-right: .25em; font-weight: 800;}
-.vhc_type {font-size:.8em; padding-left: .25em; padding-right: .25em;}
+    #vhc_bar {padding: 0 0 1em 0;}
+    #vhc_free, #vhc_occupied {display: inline-block;}
+    .vhc_display {display: inline-block; padding: .25em; margin-left: .25em; margin-right: 1em; background: rgba(0,0,0,.1);}
+    .vhc_amount {padding-left: .5em; padding-right: .25em; font-weight: 800;}
+    .vhc_type {font-size:.8em; padding-left: .25em; padding-right: .25em;}
 `);
 
 var USE_CACHE = true;
