@@ -11,7 +11,7 @@
 const STYLE = `
 <style>
 #mission_detail_container { display: flex; padding: 1em 0; background-color: #efefef: }
-.mission_detail_tab { width: 33%; }
+.mission_detail_tab { width: 50%; }
 .mission_detail_tab td { padding: 0 .5em; }
 .mission_detail_tab tr td:first-child { font-size: .7em; width: 30%; }
 .mission_detail_tab th { display: none; }
