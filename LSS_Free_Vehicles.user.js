@@ -3,17 +3,18 @@
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  try to take over the world!
-// @author       mschaeling
+// @author       You
 // @match        https://www.leitstellenspiel.de/
 // @grant        GM_addStyle
 // ==/UserScript==
 
 GM_addStyle(`
-    #vhc_bar {padding: 0 0 1em 0;}
-    #vhc_free, #vhc_occupied {display: inline-block;}
-    .vhc_display {display: inline-block; padding: .25em; margin-left: .25em; margin-right: 1em; background: rgba(0,0,0,.1);}
-    .vhc_amount {padding-left: .5em; padding-right: .25em; font-weight: 800;}
-    .vhc_type {font-size:.8em; padding-left: .25em; padding-right: .25em;}
+#vhc_bar {padding: 0;}
+#vhc_free, #vhc_occupied {display: inline-block;}
+.vhc_display {display: inline-block; padding: .25em; margin-left: .25em; margin-right: 1em; background: rgba(0,0,0,.1);}
+.vhc_amount {padding-left: .5em; padding-right: .25em; font-weight: 800;}
+.vhc_type {font-size:.8em; padding-left: .25em; padding-right: .25em;}
+#vhc_bar .building_list_fms { position: relative; top: .05em;}
 `);
 
 var USE_CACHE = true;
@@ -87,7 +88,14 @@ function occupied_vehicles() {
 
     $('#main_container').prepend('<div id="vhc_bar"><div id="vhc_free"></div><div id="vhc_occupied"></div></div>');
 
+    free_vehicles();
+
+    if (SHOW_OCCUPIED) {
+        occupied_vehicles();
+    }
+
     $("body").on('DOMSubtreeModified', "#radio", function() {
+
         free_vehicles();
 
         if (SHOW_OCCUPIED) {
