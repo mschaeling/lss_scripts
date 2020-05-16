@@ -59,6 +59,10 @@ display: contents;
   flex-direction: column;
 }
 
+#map_expand_button {
+display: none;
+}
+
 #main_container > .alert {
 position: fixed;
     top: calc(51px + 1em);
