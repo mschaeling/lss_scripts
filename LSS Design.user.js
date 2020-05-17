@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      0.6.3
 // @description  Redesign of LSS
-// @author       Manuel Schaeling
+// @author       MuckVanSchael
 // @match        https://www.leitstellenspiel.de/
 // @update       https://github.com/mschaeling/lss_scripts/edit/master/LSS%20Design.user.js
 // @grant        none
