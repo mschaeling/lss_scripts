@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         LSS Design
 // @namespace    http://tampermonkey.net/
-// @version      0.6.7
+// @version      0.6.8
 // @description  Redesign of LSS
 // @author       MuckVanSchael
 // @match        https://www.leitstellenspiel.de/
