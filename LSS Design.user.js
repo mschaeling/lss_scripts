@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         LSS Design
 // @namespace    http://tampermonkey.net/
-// @version      0.6.2
+// @version      0.6.3
 // @description  Redesign of LSS
 // @author       Manuel Schaeling
 // @match        https://www.leitstellenspiel.de/
@@ -484,20 +484,44 @@ function shortCredits() {
     $('#coins_top').html($('#coins_top').html().split('Coins: ')[1]);
 }
 
+function widgetTogglerHtml(icon, label) {
+return `
+<div class="widget-toggler">
+ <div class="widget-sticky">
+  <span class="sticked glyphicon glyphicon-lock"></span>
+  <span class="free glyphicon glyphicon-lock"></span>
+ </div>
+ <span class="glyphicon glyphicon-${icon}"></span>
+ <span class="widget-toggler-label">${label}</span>
+</div>
+`
+}
+
+function radioNoteHtml(e) {
+return `
+<span title="${e.fms_text}" class="building_list_fms building_list_fms_${e.fms_real}">${e.fms_real}</span>
+<img src="/images/icons8-location_off.svg" class="vehicle_search " vehicle_id="${e.id}">
+<a href="/vehicles/${e.id}" class="btn btn-xs btn-default lightbox-open">${e.caption}</a> <a href="/missions/${e.mission_id}" class="btn btn-xs btn-default lightbox-open">Zum Einsatz</a>
+`
+}
+
 (function() {
     'use strict';
 
     $('head').append(STYLE);
 
-    $('br').hide();
+    $('br, hr').hide();
+
+    $('#main_container').removeClass('container-fluid');
+    $('#map_outer').removeClass('col-sm-8');
 
     $('#building_panel_heading').html($('#building_panel_heading').html().split('Wachen')[1]);
     $('#chat_panel_heading').html($('#chat_panel_heading').html().split('Chat')[0]);
-
-
     $('#search_input_field_missions').attr('placeholder', 'Einsätze suchen...');
 
+    // TODO: refactor to event/function call
     shortCredits();
+
     $("body").on('DOMSubtreeModified', "#navigation_top", function() {
         shortCredits();
     });
@@ -508,52 +532,58 @@ function shortCredits() {
         $('#message_top').hide();
     }
 
-    $('hr').hide();
-    $('#main_container').removeClass('container-fluid');
-    $('#map_outer').removeClass('col-sm-8');
+    // peronal -> remove
     $('#navbar-main-collapse').prepend('<a href="/buildings/7100463" building_type="7" class="btn btn-xs btn-default lightbox-open" id="building_button_7100463" style="margin-top: 14px;">Leitstelle</a>');
 
     // widgets
-    $('#missions_outer').prepend('<div class="widget-toggler"><div class="widget-sticky"><span class="sticked glyphicon glyphicon-lock"></span><span class="free glyphicon glyphicon-lock"></span></div><span class="glyphicon glyphicon-asterisk"></span>Einsätze</div>').addClass('widget collapsed');
-    $('#buildings_outer').append('<div class="widget-toggler"><div class="widget-sticky"><span class="sticked glyphicon glyphicon-lock"></span><span class="free glyphicon glyphicon-lock"></span></div><span class="glyphicon glyphicon-home"></span>Gebäude</div>').addClass('widget collapsed');
-    $('#chat_outer').append('<div class="widget-toggler"><div class="widget-sticky"><span class="sticked glyphicon glyphicon-lock"></span><span class="free glyphicon glyphicon-lock"></span></div><span class="glyphicon glyphicon-comment"></span></div>').addClass('widget collapsed');
-    $('#radio_outer').append('<div class="widget-toggler"><div class="widget-sticky"><span class="sticked glyphicon glyphicon-lock"></span><span class="free glyphicon glyphicon-lock"></span></div><span class="glyphicon glyphicon-bullhorn"></span></div>').addClass('widget collapsed');
+    $('#missions_outer').prepend(widgetTogglerHtml('asterisk', 'Einsätze')).addClass('widget collapsed');
+    $('#buildings_outer').append(widgetTogglerHtml('home', 'Gebäude').addClass('widget collapsed');
+    $('#chat_outer').append(widgetTogglerHtml('comment', '').addClass('widget collapsed');
+    $('#radio_outer').append(widgetTogglerHtml('bullhorn', '').addClass('widget collapsed');
     $('#chat_outer').prepend('<div id="chat-widget-notes" class="widget-notes"></div>');
     $('#radio_outer').prepend('<div id="radio-widget-notes" class="widget-notes"></div>');
 
     $('#missions_outer').addClass('sticky');
 
+    // reset map
+    map.invalidateSize();
+
+    // Collapse widgets on hover a toggler
     $('.widget.collapsed .widget-toggler').on('mouseover', function(e) {
         $('.widget:not(.collapsed)').addClass('collapsed');
         $(e.target).closest('.widget').removeClass('collapsed note');
         $(e.target).closest('.widget').find('.widget-notes li').remove();
     });
 
-    $('.widget-sticky').on('click', function(e) {
-        $(e.target).closest('.widget').toggleClass('sticky');
-    });
-
+    // Collapse widgets on mouse on map
     $('#map').on('mouseover', function(e) {
         $('.widget').addClass('collapsed');
+    });
+
+    // Make widget sticky
+    $('.widget-sticky').on('click', function(e) {
+        $(e.target).closest('.widget').toggleClass('sticky');
     });
 
     $('#buildings .building_selection').each(function(){
         $(this).html($(this).html().substr(0,3));
     });
 
+    // TODO: refactor to event / function call
     $("body").on('DOMSubtreeModified', "#mission_chat_messages", function() {
         $('#chat-widget-notes').append('<li class="noted">'+$('#mission_chat_messages').find('li').first().html()+'</li>');
         $('#chat_outer.collapsed').addClass('note');
     });
 
-    map.invalidateSize();
-
     const radioMessageOrig = radioMessage;
     radioMessage = (...args) => {
         radioMessageOrig(...args);
-        if(args[0].user_id ==user_id ) {
-        $('#radio-widget-notes').append('<li class="noted">'+$('#radio_panel_body').find('li').first().html()+'</li>');
-        $('#radio_outer.collapsed').addClass('note');
+        if( args[0].user_id == user_id ) {
+            if ( !$('#radio-note-' + args[0].id).length ) {
+                $('#radio-widget-notes').append('<li id="radio-note-' + args[0].id + '" class="noted">' + radioNoteHtml(args[0]) + '</li>');
+                $('#radio_outer.collapsed').addClass('note');
+            }
         }
     };
+
 })();
