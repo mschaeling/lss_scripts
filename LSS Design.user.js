@@ -122,7 +122,7 @@ max-width: calc(66.66% - 1em);
   -ms-overflow-style: none;
 }
 
-.widget, #vhc-bar {
+.widget, #vhc-bar, li.noted {
 -webkit-box-shadow: 2px 2px 8px 0px rgba(0,0,0,0.75);
 -moz-box-shadow: 2px 2px 8px 0px rgba(0,0,0,0.75);
 box-shadow: 2px 2px 8px 0px rgba(0,0,0,0.75);
@@ -169,6 +169,67 @@ padding-right: 0;
   display: none;
 }
 
+#chat_outer.collapsed:not(.sticky) {
+width: 3em;
+height: 3em;
+border-radius: 100%;
+display: flex;
+justify-content: center;
+padding: 0;
+}
+
+
+#chat_outer.collapsed:not(.sticky) .widget-toggler {
+width: 3em;
+height: 3em;
+text-align: center;
+}
+
+#chat_outer.collapsed:not(.sticky) .widget-sticky {
+display: none;
+}
+
+
+#radio_outer.collapsed:not(.sticky) {
+width: 3em;
+height: 3em;
+border-radius: 100%;
+display: flex;
+justify-content: center;
+padding: 0;
+left: calc(66.66% - 4em);
+}
+
+
+#radio_outer.collapsed:not(.sticky) .widget-toggler {
+width: 3em;
+height: 3em;
+text-align: center;
+}
+
+#radio_outer.collapsed:not(.sticky) .widget-sticky {
+display: none;
+}
+
+div#radio-widget-notes {
+    position: fixed;
+    bottom: 1.5em;
+    right: calc(33.33% + 5em);
+    display: block;
+    width: calc(33.33% - 5em);
+}
+
+div#radio-widget-notes li.noted {
+background-color: #fff;
+margin-top: .5em;
+display: none;
+padding: .25em;
+}
+
+div#radio-widget-notes li.noted:nth-last-of-type(-n + 5) {
+display: inline-block;
+}
+
 .overview_outer.bigMapWindow {
   position: absolute;
   background: #FFF;
@@ -178,9 +239,9 @@ padding-right: 0;
 }
 
 #missions_outer {right: 1em; top: calc(51px + 1em);}
-#buildings_outer {left: 1em; bottom: 1em;}
-#chat_outer {left: calc(33.33% + 1em); bottom: 1em;}
-#radio_outer {left: calc(66.66% + 1em); bottom: 1em;}
+#buildings_outer {left: calc(66.66% + 1em); bottom: 1em;}
+#chat_outer {left: 1em; bottom: 1em;}
+#radio_outer {left: calc(33.33% + 1em); bottom: 1em;}
 
 .overview_outer.collapsed:not(.sticky) > div:not(.widget-toggler) {
   display: none;
@@ -434,16 +495,19 @@ function shortCredits() {
     $('#navbar-main-collapse').prepend('<a href="/buildings/7100463" building_type="7" class="btn btn-xs btn-default lightbox-open" id="building_button_7100463" style="margin-top: 14px;">Leitstelle</a>');
 
     // widgets
-    $('#missions_outer').prepend('<div class="widget-toggler"><div class="widget-sticky"><span class="sticked glyphicon glyphicon-lock"></span><span class="free glyphicon glyphicon-lock"></span></div><span class="glyphicon glyphicon-asterisk" style="margin-right: .5em;"></span>Einsätze</div>').addClass('widget collapsed');
-    $('#buildings_outer').append('<div class="widget-toggler"><div class="widget-sticky"><span class="sticked glyphicon glyphicon-lock"></span><span class="free glyphicon glyphicon-lock"></span></div><span class="glyphicon glyphicon-home" style="margin-right: .5em;"></span>Gebäude</div>').addClass('widget collapsed');
-    $('#chat_outer').append('<div class="widget-toggler"><div class="widget-sticky"><span class="sticked glyphicon glyphicon-lock"></span><span class="free glyphicon glyphicon-lock"></span></div><span class="glyphicon glyphicon-comment" style="margin-right: .5em;"></span>Chat</div>').addClass('widget collapsed');
-    $('#radio_outer').append('<div class="widget-toggler"><div class="widget-sticky"><span class="sticked glyphicon glyphicon-lock"></span><span class="free glyphicon glyphicon-lock"></span></div><span class="glyphicon glyphicon-bullhorn" style="margin-right: .5em;"></span>Radio</div>').addClass('widget collapsed');
+    $('#missions_outer').prepend('<div class="widget-toggler"><div class="widget-sticky"><span class="sticked glyphicon glyphicon-lock"></span><span class="free glyphicon glyphicon-lock"></span></div><span class="glyphicon glyphicon-asterisk"></span>Einsätze</div>').addClass('widget collapsed');
+    $('#buildings_outer').append('<div class="widget-toggler"><div class="widget-sticky"><span class="sticked glyphicon glyphicon-lock"></span><span class="free glyphicon glyphicon-lock"></span></div><span class="glyphicon glyphicon-home"></span>Gebäude</div>').addClass('widget collapsed');
+    $('#chat_outer').append('<div class="widget-toggler"><div class="widget-sticky"><span class="sticked glyphicon glyphicon-lock"></span><span class="free glyphicon glyphicon-lock"></span></div><span class="glyphicon glyphicon-comment"></span></div>').addClass('widget collapsed');
+    $('#radio_outer').append('<div class="widget-toggler"><div class="widget-sticky"><span class="sticked glyphicon glyphicon-lock"></span><span class="free glyphicon glyphicon-lock"></span></div><span class="glyphicon glyphicon-bullhorn"></span></div>').addClass('widget collapsed');
+    $('#chat_outer').prepend('<div id="chat-widget-notes" class="widget-notes"></div>');
+    $('#radio_outer').prepend('<div id="radio-widget-notes" class="widget-notes"></div>');
 
     $('#missions_outer').addClass('sticky');
 
     $('.widget.collapsed .widget-toggler').on('mouseover', function(e) {
         $('.widget:not(.collapsed)').addClass('collapsed');
         $(e.target).closest('.widget').removeClass('collapsed note');
+        $(e.target).closest('.widget').find('.widget-notes').remove();
     });
 
     $('.widget-sticky').on('click', function(e) {
@@ -462,9 +526,14 @@ function shortCredits() {
         $('#chat_outer.collapsed').addClass('note');
     });
 
+    map.invalidateSize();
 
-    $("body").on('DOMSubtreeModified', "#radio_panel_body", function() {
+    const radioMessageOrig = radioMessage;
+    radioMessage = (...args) => {
+
+        radioMessageOrig(...args);
+        $('#radio-widget-notes').append('<li class="noted">'+$('#radio_panel_body').find('li').first().html()+'</li>');
         $('#radio_outer.collapsed').addClass('note');
-    });
 
+    };
 })();
