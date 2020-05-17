@@ -570,8 +570,10 @@ function radioNoteHtml(e) {
     if (args[0].user_id == user_id) {
       if (!$('#radio-note-' + args[0].id).length) {
         $('#radio-widget-notes').append('<li id="radio-note-' + args[0].id + '" class="noted">' + radioNoteHtml(args[0]) + '</li>');
-        $('#radio_outer.collapsed').addClass('note');
+      } else {
+        $('#radio-note-' + args[0].id).html('<li id="radio-note-' + args[0].id + '" class="noted">' + radioNoteHtml(args[0]) + '</li>')
       }
+      $('#radio_outer.collapsed').addClass('note');
     }
   };
 
