@@ -48,7 +48,7 @@ html {
   display : none;
 }
 
-#main_container > .alert {
+body > .alert {
   z-index  : 402;
   position : fixed;
   top      : calc(51px + 1em);
@@ -84,7 +84,7 @@ footer {
   left     : 1em;
 }
 
-#main_container > .alert {
+body > .alert {
   position      : fixed;
   top           : calc(51px + 1em);
   left          : 25%;
@@ -106,7 +106,7 @@ footer {
 
 .widget {}
 
-#main_container > .alert,
+body > .alert,
 #main_navbar,
 .widget,
 li.noted {
