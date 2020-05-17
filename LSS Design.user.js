@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         LSS Design
 // @namespace    http://tampermonkey.net/
-// @version      0.6.9.6
+// @version      0.6.9.7
 // @description  Redesign of LSS
 // @author       MuckVanSchael
 // @match        https://www.leitstellenspiel.de/
@@ -523,9 +523,6 @@ function radioNoteHtml(e) {
   if (messages_count == 0) {
     $('#message_top').hide();
   }
-
-  // peronal -> remove
-  $('#navbar-main-collapse').prepend('<a href="/buildings/7100463" building_type="7" class="btn btn-xs btn-default lightbox-open" id="building_button_7100463" style="margin-top: 14px;">Leitstelle</a>');
 
   // widgets
   $('#missions_outer').prepend(widgetTogglerHtml('asterisk', 'Einsätze')).addClass('widget collapsed');
