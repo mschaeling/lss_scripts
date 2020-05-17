@@ -2,8 +2,8 @@
 // @name         LSS Design
 // @namespace    http://tampermonkey.net/
 // @version      0.6.2
-// @description  try to take over the world!
-// @author       You
+// @description  Redesign of LSS
+// @author       Manuel Schaeling
 // @match        https://www.leitstellenspiel.de/
 // @update       https://github.com/mschaeling/lss_scripts/edit/master/LSS%20Design.user.js
 // @grant        none
