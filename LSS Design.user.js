@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         LSS Design
 // @namespace    http://tampermonkey.net/
-// @version      0.6.3
+// @version      0.6.4
 // @description  Redesign of LSS
 // @author       MuckVanSchael
 // @match        https://www.leitstellenspiel.de/
@@ -537,9 +537,9 @@ return `
 
     // widgets
     $('#missions_outer').prepend(widgetTogglerHtml('asterisk', 'Einsätze')).addClass('widget collapsed');
-    $('#buildings_outer').append(widgetTogglerHtml('home', 'Gebäude').addClass('widget collapsed');
-    $('#chat_outer').append(widgetTogglerHtml('comment', '').addClass('widget collapsed');
-    $('#radio_outer').append(widgetTogglerHtml('bullhorn', '').addClass('widget collapsed');
+    $('#buildings_outer').append(widgetTogglerHtml('home', 'Gebäude')).addClass('widget collapsed');
+    $('#chat_outer').append(widgetTogglerHtml('comment', '')).addClass('widget collapsed');
+    $('#radio_outer').append(widgetTogglerHtml('bullhorn', '')).addClass('widget collapsed');
     $('#chat_outer').prepend('<div id="chat-widget-notes" class="widget-notes"></div>');
     $('#radio_outer').prepend('<div id="radio-widget-notes" class="widget-notes"></div>');
 
