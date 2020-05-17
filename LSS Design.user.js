@@ -5,7 +5,7 @@
 // @description  try to take over the world!
 // @author       You
 // @match        https://www.leitstellenspiel.de/
-// @update       https://github.com/mschaeling/lss_scripts/edit/master/LSS%20Design.user.js
+// @updateURL       https://github.com/mschaeling/lss_scripts/edit/master/LSS%20Design.user.js
 // @grant        GM_addStyle
 // ==/UserScript==
 
