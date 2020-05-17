@@ -476,6 +476,11 @@ div[id^="mission_patients_"] {
   display : none;
 }
 
+#chat_outer.noted {
+  color: white;
+  background-color: red;
+}
+
 </style>
 `;
 
