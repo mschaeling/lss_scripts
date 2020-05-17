@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         LSS Design
 // @namespace    http://tampermonkey.net/
-// @version      0.6.1
+// @version      0.6.2
 // @description  try to take over the world!
 // @author       You
 // @match        https://www.leitstellenspiel.de/
@@ -10,6 +10,7 @@
 // ==/UserScript==
 
 const STYLE = `
+<style>
 #vhc_bar {
   z-index            : 401;
   position           : fixed;
@@ -474,6 +475,8 @@ div[id^="mission_patients_"] {
 #buildings_outer {
   display : none;
 }
+
+</style>
 `;
 
 function shortCredits() {
