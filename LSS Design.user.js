@@ -229,7 +229,7 @@ div#radio-widget-notes li.noted:nth-last-of-type(-n + 5) {
   height : calc(100% - 51px - 2em);
 }
 
-#missions_outer.collapsed {
+#missions_outer:not(.collapsed) {
   height : auto;
 }
 
