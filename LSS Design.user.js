@@ -459,7 +459,7 @@ div[id^="mission_patients_"] {
   display : none;
 }
 
-#chat_outer.noted {
+#chat_outer.note {
   color            : white;
   background-color : red;
 }
@@ -557,11 +557,12 @@ function radioNoteHtml(e) {
     $(this).html($(this).html().substr(0, 3));
   });
 
-  // TODO: refactor to event / function call
-  $("body").on('DOMSubtreeModified', "#mission_chat_messages", function() {
+  const allianceMessageNewOrig = allianceMessageNew;
+  allianceMessageNew = (...args) => {
+    allianceMessageNewOrig(...args);
     $('#chat-widget-notes').append('<li class="noted">' + $('#mission_chat_messages').find('li').first().html() + '</li>');
     $('#chat_outer.collapsed').addClass('note');
-  });
+  };
 
   const radioMessageOrig = radioMessage;
   radioMessage = (...args) => {

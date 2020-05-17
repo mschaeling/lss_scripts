@@ -445,7 +445,7 @@ div[id^="mission_patients_"] {
   display : none;
 }
 
-#chat_outer.noted {
+#chat_outer.note {
   color            : white;
   background-color : red;
 }
