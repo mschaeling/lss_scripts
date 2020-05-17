@@ -571,7 +571,6 @@ function radioNoteHtml(e) {
   const radioMessageOrig = radioMessage;
   radioMessage = (...args) => {
     radioMessageOrig(...args);
-    console.log(args[0]);
     if (args[0].user_id == user_id) {
       if ($('#radio-note-' + args[0].id).length) {
         $('#radio-note-' + args[0].id).remove();
