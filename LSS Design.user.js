@@ -49,10 +49,10 @@ html {
 }
 
 body > .alert {
-  z-index  : 402;
-  position : fixed;
-  top      : calc(51px + 1em);
-  left     : 5em;
+  z-index  : 402 !important;
+  position : fixed !important;
+  top      : calc(51px + 1em) !important;
+  left     : 5em !important;
 }
 
 #content {
@@ -85,11 +85,11 @@ footer {
 }
 
 body > .alert {
-  position      : fixed;
-  top           : calc(51px + 1em);
-  left          : 25%;
-  width         : 50%;
-  border-radius : 0;
+  position      : fixed !important;
+  top           : calc(51px + 1em) !important;
+  left          : 25% !important;
+  width         : 50% !important;
+  border-radius : 0 !important;
 }
 
 .client-id {
@@ -110,9 +110,9 @@ body > .alert,
 #main_navbar,
 .widget,
 li.noted {
-  -moz-box-shadow    : 2px 2px 8px 0px rgba(0,0,0,0.75);
-  -webkit-box-shadow : 2px 2px 8px 0px rgba(0,0,0,0.75);
-  box-shadow         : 2px 2px 8px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow    : 2px 2px 8px 0px rgba(0,0,0,0.75) !important;
+  -webkit-box-shadow : 2px 2px 8px 0px rgba(0,0,0,0.75) !important;
+  box-shadow         : 2px 2px 8px 0px rgba(0,0,0,0.75) !important;
 }
 
 .widget .panel-heading {
