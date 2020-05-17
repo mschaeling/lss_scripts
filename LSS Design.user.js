@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         LSS Design
 // @namespace    http://tampermonkey.net/
-// @version      0.6.9.5
+// @version      0.6.9.6
 // @description  Redesign of LSS
 // @author       MuckVanSchael
 // @match        https://www.leitstellenspiel.de/
@@ -561,9 +561,14 @@ function radioNoteHtml(e) {
     $(this).html($(this).html().substr(0, 3));
   });
 
+  $("#chat_panel_body").on('DOMSubtreeModified', "#mission_chat_messages", function() {
+    console.log('alliance chat message');
+  });
+
   const allianceMessageNewOrig = allianceMessageNew;
   allianceMessageNew = (...args) => {
     allianceMessageNewOrig(...args);
+    console.log('alliance chat message');
     $('#chat-widget-notes').append('<li class="noted">' + $('#mission_chat_messages').find('li').first().html() + '</li>');
     $('#chat_outer.collapsed').addClass('note');
   };
