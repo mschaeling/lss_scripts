@@ -9,19 +9,18 @@
 // @grant        GM_addStyle
 // ==/UserScript==
 
-
 GM_addStyle(`
 
 #vhc_bar {
-position: fixed;
-top: calc(51px + 1em);
-left: 1em;
-z-index: 401;
-padding: .25em;
-background-color: #FFF;
--webkit-box-shadow: 2px 2px 8px 0px rgba(0,0,0,0.75);
--moz-box-shadow: 2px 2px 8px 0px rgba(0,0,0,0.75);
-box-shadow: 2px 2px 8px 0px rgba(0,0,0,0.75);
+  position: fixed;
+  top: calc(51px + 1em);
+  left: 1em;
+  z-index: 401;
+  padding: .25em;
+  background-color: #FFF;
+  -webkit-box-shadow: 2px 2px 8px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 2px 2px 8px 0px rgba(0,0,0,0.75);
+  box-shadow: 2px 2px 8px 0px rgba(0,0,0,0.75);
 }
 
 body, html {
@@ -37,21 +36,21 @@ body, html {
 
 #main_navbar {
   margin: 0;
-border: none;
+  border: none;
 }
 
 .navbar-default {
-border-color: #c9302c;
+  border-color: #c9302c;
 }
 
 #main_navbar {
--webkit-box-shadow: 2px 2px 8px 0px rgba(0,0,0,0.75);
--moz-box-shadow: 2px 2px 8px 0px rgba(0,0,0,0.75);
-box-shadow: 2px 2px 8px 0px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 2px 2px 8px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 2px 2px 8px 0px rgba(0,0,0,0.75);
+  box-shadow: 2px 2px 8px 0px rgba(0,0,0,0.75);
 }
 
 #row-main-template {
-display: contents;
+  display: contents;
 }
 #main_container {
   overflow: hidden;
