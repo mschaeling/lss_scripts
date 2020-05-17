@@ -5,6 +5,7 @@
 // @description  try to take over the world!
 // @author       You
 // @match        https://www.leitstellenspiel.de/
+// @update       https://github.com/mschaeling/lss_scripts/edit/master/LSS%20Design.user.js
 // @grant        GM_addStyle
 // ==/UserScript==
 
@@ -217,6 +218,7 @@ div#radio-widget-notes {
     right: calc(33.33% + 5em);
     display: block;
     width: calc(33.33% - 5em);
+text-align: right;
 }
 
 div#radio-widget-notes li.noted {
@@ -238,7 +240,7 @@ display: inline-block;
   width: calc(33.33% - 2em);
 }
 
-#missions_outer {right: 1em; top: calc(51px + 1em);}
+#missions_outer {right: 1em; top: calc(51px + 1em); height: calc(100% - 51px - 2em);}
 #buildings_outer {left: calc(66.66% + 1em); bottom: 1em;}
 #chat_outer {left: 1em; bottom: 1em;}
 #radio_outer {left: calc(33.33% + 1em); bottom: 1em;}
@@ -430,6 +432,7 @@ background-image: none;
 }
 #missions-panel-body {
  padding: 0;
+height: 100%;
 }
 
 #missions .panel-heading {
@@ -455,9 +458,8 @@ padding-top: 0;
 width: 100%;
 }
 
-.widget.note {
-color: #f44336;
-background-color: #ffcdd2;
+#buildings_outer {
+display: none;
 }
 
 `);
@@ -507,7 +509,7 @@ function shortCredits() {
     $('.widget.collapsed .widget-toggler').on('mouseover', function(e) {
         $('.widget:not(.collapsed)').addClass('collapsed');
         $(e.target).closest('.widget').removeClass('collapsed note');
-        $(e.target).closest('.widget').find('.widget-notes').remove();
+        $(e.target).closest('.widget').find('.widget-notes li').remove();
     });
 
     $('.widget-sticky').on('click', function(e) {
@@ -523,6 +525,7 @@ function shortCredits() {
     });
 
     $("body").on('DOMSubtreeModified', "#mission_chat_messages", function() {
+        $('#chat-widget-notes').append('<li class="noted">'+$('#mission_chat_messages').find('li').first().html()+'</li>');
         $('#chat_outer.collapsed').addClass('note');
     });
 
@@ -530,10 +533,10 @@ function shortCredits() {
 
     const radioMessageOrig = radioMessage;
     radioMessage = (...args) => {
-
         radioMessageOrig(...args);
+        if(args[0].user_id ==user_id ) {
         $('#radio-widget-notes').append('<li class="noted">'+$('#radio_panel_body').find('li').first().html()+'</li>');
         $('#radio_outer.collapsed').addClass('note');
-
+        }
     };
 })();
