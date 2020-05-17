@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         LSS Design
 // @namespace    http://tampermonkey.net/
-// @version      0.6.4
+// @version      0.6.5
 // @description  Redesign of LSS
 // @author       MuckVanSchael
 // @match        https://www.leitstellenspiel.de/
@@ -102,12 +102,11 @@ const STYLE = `
   }
 
   #important_messages_success {
-    position  : fixed;
-    top       : unset;
-    bottom    : 6em;
-    left      : 1em;
-    width     : 80%;
-    max-width : calc(66.66% - 1em);
+    position      : fixed;
+    top           : calc(51px + 1em);
+    left          : 25%;
+    width         : 50%;
+    border-radius : 0;
   }
 
   .client-id {
@@ -126,7 +125,8 @@ const STYLE = `
 
   #vhc-bar,
   .widget,
-  li.noted {
+  li.noted,
+  important_messages_success {
     -moz-box-shadow    : 2px 2px 8px 0px rgba(0,0,0,0.75);
     -webkit-box-shadow : 2px 2px 8px 0px rgba(0,0,0,0.75);
     box-shadow         : 2px 2px 8px 0px rgba(0,0,0,0.75);
