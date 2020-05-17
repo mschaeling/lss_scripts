@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         LSS Design
 // @namespace    http://tampermonkey.net/
-// @version      0.5
+// @version      0.5.1
 // @description  try to take over the world!
 // @author       You
 // @match        https://www.leitstellenspiel.de/
@@ -17,7 +17,7 @@ function shortCredits() {
 (function() {
     'use strict';
 
-    $('head').append('<link href="https://gitcdn.link/repo/mschaeling/lss_scripts/master/lss-design.css" rel="stylesheet" type="text/css">')
+    $('head').append('<link href="https://raw.githubusercontent.com/mschaeling/lss_scripts/master/lss-design.css" rel="stylesheet" type="text/css">')
 
     $('br').hide();
 
