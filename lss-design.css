@@ -1,15 +1,3 @@
-#vhc_bar {
-  z-index            : 401;
-  position           : fixed;
-  top                : calc(51px + 1em);
-  left               : 1em;
-  padding            : .25em;
-  background-color   : #FFF;
-  -moz-box-shadow    : 2px 2px 8px 0px rgba(0,0,0,0.75);
-  -webkit-box-shadow : 2px 2px 8px 0px rgba(0,0,0,0.75);
-  box-shadow         : 2px 2px 8px 0px rgba(0,0,0,0.75);
-}
-
 body,
 html {
   display        : flex;
@@ -29,12 +17,6 @@ html {
 
 .navbar-default {
   border-color : #c9302c;
-}
-
-#main_navbar {
-  -moz-box-shadow    : 2px 2px 8px 0px rgba(0,0,0,0.75);
-  -webkit-box-shadow : 2px 2px 8px 0px rgba(0,0,0,0.75);
-  box-shadow         : 2px 2px 8px 0px rgba(0,0,0,0.75);
 }
 
 #row-main-template {
@@ -88,13 +70,12 @@ footer {
   left     : 1em;
 }
 
-#important_messages_success {
-  position  : fixed;
-  top       : unset;
-  bottom    : 6em;
-  left      : 1em;
-  width     : 80%;
-  max-width : calc(66.66% - 1em);
+#main_container > .alert {
+  position      : fixed;
+  top           : calc(51px + 1em);
+  left          : 25%;
+  width         : 50%;
+  border-radius : 0;
 }
 
 .client-id {
@@ -111,7 +92,8 @@ footer {
 
 .widget {}
 
-#vhc-bar,
+#main_container > .alert,
+#main_navbar,
 .widget,
 li.noted {
   -moz-box-shadow    : 2px 2px 8px 0px rgba(0,0,0,0.75);
@@ -461,4 +443,9 @@ div[id^="mission_patients_"] {
 
 #buildings_outer {
   display : none;
+}
+
+#chat_outer.noted {
+  color            : white;
+  background-color : red;
 }
