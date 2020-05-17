@@ -215,6 +215,10 @@ div#radio-widget-notes li.noted:nth-last-of-type(-n + 5) {
   height : calc(100% - 51px - 2em);
 }
 
+#missions_outer.collapsed {
+  height : auto;
+}
+
 #buildings_outer {
   bottom : 1em;
   left   : calc(66.66% + 1em);

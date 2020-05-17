@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         LSS Design
 // @namespace    http://tampermonkey.net/
-// @version      0.6.9
+// @version      0.6.9.1
 // @description  Redesign of LSS
 // @author       MuckVanSchael
 // @match        https://www.leitstellenspiel.de/
@@ -227,6 +227,10 @@ div#radio-widget-notes li.noted:nth-last-of-type(-n + 5) {
   top    : calc(51px + 1em);
   right  : 1em;
   height : calc(100% - 51px - 2em);
+}
+
+#missions_outer.collapsed {
+  height : auto;
 }
 
 #buildings_outer {
