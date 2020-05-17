@@ -19,36 +19,36 @@ const STYLE = `
 `;
 
 const WRAPPER = '<div id="mission_detail_container">lädt...</div>';
-const COLUMN = {'prefix': '<div class="mission_detail_tab"><table>', 'suffix': '</table></div>'};
+const COLUMN = { 'prefix': '<div class="mission_detail_tab"><table>', 'suffix': '</table></div>' };
 
 (function() {
-    'use strict';
+  'use strict';
 
-    var old_lightboxShowClose = window.lightboxShowClose;
+  var old_lightboxShowClose = window.lightboxShowClose;
 
-    window.lightboxShowClose = function(e) {
+  window.lightboxShowClose = function(e) {
 
-        old_lightboxShowClose(e);
+    old_lightboxShowClose(e);
 
-        var contents = $("#lightbox_iframe_" + iframe_lightbox_number).contents();
+    var contents = $("#lightbox_iframe_" + iframe_lightbox_number).contents();
 
-        contents.find("head").append(STYLE);
-        contents.find("#col_right").prepend(WRAPPER);
+    contents.find("head").append(STYLE);
+    contents.find("#col_right").prepend(WRAPPER);
 
-        $.get(contents.find("#mission_help").attr('href'), function(data){
+    $.get(contents.find("#mission_help").attr('href'), function(data) {
 
-            var html = '';
+      var html = '';
 
-            $($.parseHTML(data)).filter('#iframe-inside-container').find('.row table').each(function(e){
-                if (e > 0) {
-                    html += COLUMN.prefix + $(this).html() + COLUMN.suffix;
-                }
-            });
+      $($.parseHTML(data)).filter('#iframe-inside-container').find('.row table').each(function(e) {
+        if (e > 0) {
+          html += COLUMN.prefix + $(this).html() + COLUMN.suffix;
+        }
+      });
 
-            contents.find("#mission_detail_container").html(html);
+      contents.find("#mission_detail_container").html(html);
 
-        });
+    });
 
-    }
+  }
 
 })();
