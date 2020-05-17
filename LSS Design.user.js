@@ -573,11 +573,10 @@ function radioNoteHtml(e) {
     radioMessageOrig(...args);
     console.log(args[0]);
     if (args[0].user_id == user_id) {
-      if (!$('#radio-note-' + args[0].id).length) {
-        $('#radio-widget-notes').append('<li id="radio-note-' + args[0].id + '" class="noted">' + radioNoteHtml(args[0]) + '</li>');
-      } else {
-        $('#radio-note-' + args[0].id).html(radioNoteHtml(args[0]));
+      if ($('#radio-note-' + args[0].id).length) {
+        $('#radio-note-' + args[0].id).remove();
       }
+      $('#radio-widget-notes').append('<li id="radio-note-' + args[0].id + '" class="noted">' + radioNoteHtml(args[0]) + '</li>');
       $('#radio_outer.collapsed').addClass('note');
     }
   };
