@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         LSS Design
 // @namespace    http://tampermonkey.net/
-// @version      0.6.9.4
+// @version      0.6.9.5
 // @description  Redesign of LSS
 // @author       MuckVanSchael
 // @match        https://www.leitstellenspiel.de/
@@ -576,7 +576,7 @@ function radioNoteHtml(e) {
       if (!$('#radio-note-' + args[0].id).length) {
         $('#radio-widget-notes').append('<li id="radio-note-' + args[0].id + '" class="noted">' + radioNoteHtml(args[0]) + '</li>');
       } else {
-        $('#radio-note-' + args[0].id).html('<li id="radio-note-' + args[0].id + '" class="noted">' + radioNoteHtml(args[0]) + '</li>')
+        $('#radio-note-' + args[0].id).html(radioNoteHtml(args[0]));
       }
       $('#radio_outer.collapsed').addClass('note');
     }
